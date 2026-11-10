@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Letter For You</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #2b1d1d; font-family: 'Playfair Display', serif; min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .container { position: relative; width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center; }
+        .envelope-wrapper { position: absolute; cursor: pointer; transition: transform 0.5s ease, opacity 0.5s ease; z-index: 10; }
+        .envelope-wrapper.open { transform: scale(0.9) translateY(100px); opacity: 0; pointer-events: none; }
+        .envelope { position: relative; width: 360px; height: 230px; background: #8b3a3a; border-radius: 0 0 10px 10px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; }
+        .envelope::before { content: ''; position: absolute; top: 0; left: 0; border-left: 180px solid transparent; border-right: 180px solid transparent; border-top: 130px solid #a44848; transform-origin: top; transition: transform 0.4s ease 0.2s; z-index: 3; }
+        .envelope-wrapper.opening .envelope::before { transform: rotateX(180deg); z-index: 1; }
+        .flap-left { position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-bottom: 130px solid #7d3333; border-right: 180px solid transparent; z-index: 2; border-radius: 0 0 0 10px; }
+        .flap-right { position: absolute; bottom: 0; right: 0; width: 0; height: 0; border-bottom: 130px solid #7d3333; border-left: 180px solid transparent; z-index: 2; border-radius: 0 0 10px 0; }
+        .flap-bottom { position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-top: 130px solid transparent; border-bottom: 100px solid #8b3a3a; border-left: 180px solid transparent; border-right: 180px solid transparent; z-index: 4; border-radius: 0 0 10px 10px; }
+        .envelope-text { position: absolute; top: 75px; left: 50%; transform: translateX(-50%); z-index: 5; text-align: center; font-family: 'Dancing Script', cursive; color: #faf4e6; width: 100%; pointer-events: none; text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+        .envelope-text .to-line { font-size: 24px; font-weight: 700; }
+        .envelope-text .from-line { font-size: 20px; margin-top: 2px; }
+        .hint { position: absolute; bottom: -45px; left: 50%; transform: translateX(-50%); color: #d4af37; font-size: 15px; letter-spacing: 1px; white-space: nowrap; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
+        .letter-container { position: absolute; width: 90%; max-width: 650px; max-height: 90vh; background: #faf4e6; padding: 40px 50px; border-radius: 4px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); transform: translateY(50px) scale(0.8); opacity: 0; pointer-events: none; transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s; overflow-y: auto; border: 1px solid #e0d0b0; }
+        .letter-container.show { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+        .letter-content { color: #3d2c2c; font-size: 16px; line-height: 1.8; font-style: italic; }
+        .letter-content p { margin-bottom: 20px; }
+        .letter-content h3 { font-family: 'Dancing Script', cursive; font-size: 32px; color: #8b3a3a; margin-bottom: 20px; font-weight: 700; }
+        .close-btn { display: block; margin: 30px auto 0 auto; background: #8b3a3a; color: #fff; border: none; padding: 10px 25px; font-family: 'Playfair Display', serif; font-size: 14px; letter-spacing: 1px; border-radius: 4px; cursor: pointer; transition: background 0.3s; }
+        .close-btn:hover { background: #a44848; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="envelope-wrapper" id="envelopeWrapper" onclick="openEnvelope()">
+            <div class="envelope">
+                <div class="flap-left"></div>
+                <div class="flap-right"></div>
+                <div class="flap-bottom"></div>
+                <div class="envelope-text">
+                    <div class="to-line">To: Sreya ✨</div>
+                    <div class="from-line">From: Sanu</div>
+                </div>
+            </div>
+            <div class="hint">Tap to open your letter ✨</div>
+        </div>
+        <div class="letter-container" id="letterContainer">
+            <div class="letter-content">
+                <h3>Hey,</h3>
+                <p>I don't know why, but today I kept thinking about you sitting there alone in Bangalore, studying maths on Diwali, while everyone else is busy celebrating.</p>
+                <p>Most people would have given up and said "I'll study tomorrow." But you didn't. You stayed, you focused, you kept pushing for something new, for yourself. That says a lot about you.</p>
+                <p>I like that about you. You don't just talk about your dreams, you actually work for them. Even when it's hard, even when it's lonely, even when it's maths. And honestly, that's one of the reasons I can't stop thinking about you.</p>
+                <p>I just wanted you to know that I see it. And I'm really proud of you for it.</p>
+                <p>Whenever you feel tired or stuck, just remember, you are doing something most people don't have the courage to do. You are building your own future, by yourself. And you are doing it beautifully. You are beautiful like that.</p>
+                <p>So study well, but also take care of yourself. Eat something good, drink some water, and smile a little in between those maths problems. Your smile is my favourite part of my day, even if I don't get to see it.</p>
+                <p>Fingers crossed, like you said. It will work out. I hope so too.</p>
+                <p>From someone who is quietly rooting for you, a little more than you think.</p>
+            </div>
+            <button class="close-btn" onclick="closeEnvelope()">Close Envelope</button>
+        </div>
+    </div>
+    <script>
+        function openEnvelope() {
+            const wrapper = document.getElementById('envelopeWrapper');
+            const letter = document.getElementById('letterContainer');
+            wrapper.classList.add('opening');
+            setTimeout(() => { wrapper.classList.add('open'); letter.classList.add('show'); }, 400);
+        }
+        function closeEnvelope() {
+            const wrapper = document.getElementById('envelopeWrapper');
+            const letter = document.getElementById('letterContainer');
+            letter.classList.remove('show');
+            wrapper.classList.remove('open');
+            setTimeout(() => { wrapper.classList.remove('opening'); }, 400);
+        }
+    </script>
+</body>
+</html>
